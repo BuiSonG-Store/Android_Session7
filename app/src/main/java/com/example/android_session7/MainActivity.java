@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.example.android_session7.adapter.HourAdapter;
-import com.example.android_session7.model.Wheather;
+import com.example.android_session7.model.Weather;
 import com.example.android_session7.network.ApiManager;
 
 import java.util.List;
@@ -45,22 +45,22 @@ public class MainActivity extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         ApiManager service = retrofit.create(ApiManager.class);
-        service.getHour().enqueue(new Callback<List<Wheather>>() {
+        service.getHour().enqueue(new Callback<List<Weather>>() {
             @Override
-            public void onResponse(Call<List<Wheather>> call, Response<List<Wheather>> response) {
+            public void onResponse(Call<List<Weather>> call, Response<List<Weather>> response) {
                 if (response.body() == null) return;
 
-                List<Wheather> listWheather = response.body();
-                HourAdapter adapter = new HourAdapter(MainActivity.this, listWheather);
+                List<Weather> listWeather = response.body();
+                HourAdapter adapter = new HourAdapter(MainActivity.this, listWeather);
                 rvHour.setAdapter(adapter);
 
-                Wheather wheather = listWheather.get(0);
-                tvTem.setText(wheather.getTemperature().getValue().intValue() + "°");
-                tvStatus.setText(wheather.getIconPhrase());
+                Weather weather = listWeather.get(0);
+                tvTem.setText(weather.getTemperature().getValue().intValue() + "°");
+                tvStatus.setText(weather.getIconPhrase());
             }
 
             @Override
-            public void onFailure(Call<List<Wheather>> call, Throwable t) {
+            public void onFailure(Call<List<Weather>> call, Throwable t) {
 
             }
         });

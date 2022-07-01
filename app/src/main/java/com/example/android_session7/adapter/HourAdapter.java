@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.android_session7.R;
-import com.example.android_session7.model.Wheather;
+import com.example.android_session7.model.Weather;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -21,11 +21,11 @@ import java.util.List;
 
 public class HourAdapter  extends RecyclerView.Adapter {
     private Activity activity;
-    private List<Wheather> listWheather;
+    private List<Weather> listWeather;
 
-    public HourAdapter(Activity activity, List<Wheather> listWheather) {
+    public HourAdapter(Activity activity, List<Weather> listWeather) {
         this.activity = activity;
-        this.listWheather = listWheather;
+        this.listWeather = listWeather;
     }
 
     @NonNull
@@ -40,21 +40,21 @@ public class HourAdapter  extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         HourHolder vh = (HourHolder) holder;
-        Wheather wheather = listWheather.get(position);
-        vh.tvTime.setText(convertTime(wheather.getDateTime()));
-        vh.tvTem.setText(wheather.getTemperature().getValue()+"");
+        Weather weather = listWeather.get(position);
+        vh.tvTime.setText(convertTime(weather.getDateTime()));
+        vh.tvTem.setText(weather.getTemperature().getValue()+"");
         String url = "";
-        if (wheather.getWeatherIcon() < 10){
-            url = "https://developer.accuweather.com/sites/default/files/0" + wheather.getWeatherIcon() + "-s.png";
+        if (weather.getWeatherIcon() < 10){
+            url = "https://developer.accuweather.com/sites/default/files/0" + weather.getWeatherIcon() + "-s.png";
         }else {
-            url = "https://developer.accuweather.com/sites/default/files/" + wheather.getWeatherIcon() + "-s.png";
+            url = "https://developer.accuweather.com/sites/default/files/" + weather.getWeatherIcon() + "-s.png";
         }
         Glide.with(activity).load(url).into(vh.icon);
     }
 
     @Override
     public int getItemCount() {
-        return listWheather.size();
+        return listWeather.size();
     }
 
     public static class HourHolder extends RecyclerView.ViewHolder{

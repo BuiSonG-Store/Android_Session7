@@ -1,6 +1,6 @@
 package com.example.android_session7.model;
 
-public class Wheather {
+public class Weather {
     private String DateTime;
     private int WeatherIcon;
     private String IconPhrase;
